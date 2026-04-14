@@ -14,11 +14,3 @@ $guestData = [
         'alcohol' => ['wine', 'champagne'],
     ],
 ];
-
-
-print_r($guestData);
-
-
-print_r($guestData[0]['alcohol']);
-
-echo $guestData[0]['alcohol'][1];
