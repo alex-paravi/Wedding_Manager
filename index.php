@@ -14,3 +14,9 @@ $guestData = [
         'alcohol' => ['wine', 'champagne'],
     ],
 ];
+
+foreach ($guestData as $guest) {
+    if ($guest['is_confirmed'] === true) {
+        echo "{$guest['name']} идёт на свадьбу!  Напитков выбрано:" .  count($guest['alcohol']) . PHP_EOL;
+    }
+}
