@@ -9,30 +9,29 @@ $guestData = [
     ],
     [
         'name' => 'Ирина Андреева',
-        'is_confirmed' => true,
+        'is_confirmed' => false,
         'side' => 'bride',
         'alcohol' => ['wine', 'champagne'],
     ],
 ];
 
+$totalDrinks = 0;
+$allAlcoholType = [];
+
 foreach ($guestData as $guest) {
     if ($guest['is_confirmed'] === true) {
-        echo "{$guest['name']} идёт на свадьбу!  Напитков выбрано:" .  count($guest['alcohol']) . PHP_EOL;
-    }
-};
-
-foreach ($guestData as $guest) {
-    if ($guest['side'] === 'groom') {
-        echo "{$guest['name']} со стороны жениха" . PHP_EOL;
+        echo "{$guest['name']} подверждён." . PHP_EOL;
     } else {
-        echo "{$guest['name']} со стороны невесты" . PHP_EOL;
+        echo "{$guest['name']} на уточнении." . PHP_EOL;
+    };
+    if ($guest['side'] === 'groom') {
+        echo "{$guest['name']} сторона жениха." . PHP_EOL;
+    } else {
+        echo "{$guest['name']} сторона невесты." . PHP_EOL;
     }
-};
-$totalDrinks = 0;
-foreach ($guestData as $guest) {
     $totalDrinks += count($guest['alcohol']);
-    $totalAlcoholType = $guest['alcohol'];
-    $alcoholList = implode(",", $totalAlcoholType);
-};
-
-print_r("Всего надо купить {$totalDrinks} бутылок") . PHP_EOL;
+    $allAlcoholType = array_merge($allAlcoholType, $guest['alcohol']);
+}
+$uniqueAlcohol = array_unique($allAlcoholType);
+$alcoholString = implode(", ", $uniqueAlcohol) . ".";
+echo ($alcoholString);
