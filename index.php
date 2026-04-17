@@ -15,7 +15,15 @@ $guestData = [
     ],
 ];
 
+$prices = [
+    'wine' => 800,
+    'beer' => 250,
+    'vodka' => 1200,
+    'champagne' => 1500
+];
+
 $totalDrinks = 0;
+$totalCost = 0;
 $allAlcoholType = [];
 
 foreach ($guestData as $guest) {
@@ -31,7 +39,18 @@ foreach ($guestData as $guest) {
     }
     $totalDrinks += count($guest['alcohol']);
     $allAlcoholType = array_merge($allAlcoholType, $guest['alcohol']);
+    $guestAlcoholCost = 0;
+
+    foreach ($guest['alcohol'] as $drinkName) {
+        if (isset($prices[$drinkName])) {
+            $guestAlcoholCost += $prices[$drinkName];
+        }
+    }
+    $totalCost += $guestAlcoholCost;
+
+    echo "Бюджет на напитки для {$guest['name']}: {$guestAlcoholCost} руб." . PHP_EOL;
 }
 $uniqueAlcohol = array_unique($allAlcoholType);
 $alcoholString = implode(", ", $uniqueAlcohol) . ".";
-echo ($alcoholString);
+echo ($alcoholString) . PHP_EOL;
+echo "ИТОГО к оплате в магазине: {$totalCost}" . PHP_EOL;
